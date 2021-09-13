@@ -1,22 +1,39 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 ##############################
 # Define pipeline variables
 ##############################
-base=/fs/ess/PCON0160/projects/eggd1-eggd2
+base=/fs/ess/PCON0160/workshop-913
 datadir=${base}/data/smRNA
 results=${base}/results/smRNA
-logs=${base}/logs/smRNA_test
-config=${base}/eggd1-eggd2-git-repo/config
+logs=${base}/logs/smRNA
+
+config=${base}/workshop/config
 params=${config}/alignment_parameters.sh
 normalization=genomic
 scratch=/fs/scratch/PCON0160
 
 ##############################
+# Check and make directories
+##############################
+if [ ! -d ${datadir} ]
+then mkdir -p ${datadir}
+fi
+
+if [ ! -d "${logs}" ]
+then mkdir -p ${logs}
+fi 
+
+if [ ! -d "${results}" ]
+then mkdir -p ${results}
+fi
+
+
+##############################
 # Copy data to working directory data directory
 ##############################
-seq_data=/fs/ess/PCON0160/deep_sequencing/processed_data/Pearlly_GSL-PY-1895-transfer/uniq-fasta
-samples=(eggd2_1 eggd2_2 RFPPGL1_1 RFPPGL1_2)
+seq_data=/fs/ess/PCON0160/deep_sequencing/processed_data/Pearlly_GSL-PY-2242-transfer/smRNA/uniq-fasta
+samples=(N2cul2RNAi_1 N2cul2RNAi_2 N2L4440_1 N2L4440_2)
 for f in "${samples[@]}"; do
     cp ${seq_data}/${f}_uni_17.fa ${datadir}/
 done
@@ -25,22 +42,7 @@ done
 # Define pipeline variables ( dont need to change this )
 ##############################
 pipeline_directory=/fs/ess/PCON0160/script-repo 
-run_script=${pipeline_directory}/run_scripts/run_bowtie_align.sh
-
-##############################
-# Check and make directories
-##############################
-if [ ! -d ${datadir} ]
-then mkdir ${datadir}
-fi
-
-if [ ! -d "${logs}" ]
-then mkdir ${logs}
-fi 
-
-if [ ! -d "${results}" ]
-then mkdir ${results}
-fi
+run_script=${pipeline_directory}/run_scripts/run_bowtie_align_2.sh
 
 ##############################
 # Submit jobs to HPC
