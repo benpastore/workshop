@@ -1,0 +1,33 @@
+#!/usr/bin/sh
+
+wormcom=/fs/ess/PCON0160/wormcommon
+mirbase=/fs/ess/PCON0160/wormcommon/miRBase19
+
+org=ce
+WSnum=WS279
+
+bowtie_idx_dir=${wormcom}/${org}_${WSnum}/bowtie_index
+tailor_idx_dir=${wormcom}/${org}_${WSnum}/tailor_index
+
+# genome references 
+genomic_ref=${bowtie_idx_dir}/${org}_${WSnum}.genomic
+knownrna_ref=${bowtie_idx_dir}/${org}_${WSnum}.knownRNA
+junc_ref=${bowtie_idx_dir}/${org}_${WSnum}.coding_transcript.juncs
+gpltx_ref=${bowtie_idx_dir}/${org}_${WSnum}.mRNA_transcripts
+rrna_ref=${bowtie_idx_dir}/${org}_${WSnum}.rna.rrna
+
+tailor_genome=${tailor_idx_dir}/${org}_${WSnum}.genomic
+tailor_junction=${tailor_idx_dir}/${org}_${WSnum}.juncs
+
+# chromosome sizes for bw 
+chrom_sizes=${wormcom}/${org}_${WSnum}/${org}_${WSnum}.genomic.sizes
+gpltx_sizes=${wormcom}/${org}_${WSnum}/${org}_${WSnum}.mRNA_transcripts.sizes
+rrna_sizes=${wormcom}/${org}_${WSnum}/${org}_${WSnum}.rna.rrna.sizes
+
+# bedfiles
+hairpin_bed=${mirbase}/map_${WSnum}/${org}_${WSnum}.ncrna.hairpin.miRBase.bed
+mirna=${mirbase}/map_${WSnum}/${org}_${WSnum}.ncrna.miRNA.miRBase.bed
+exons=${wormcom}/${org}_${WSnum}/${org}_${WSnum}.coding_transcript.exon.merge.bed
+pseudogene=${wormcom}/${org}_${WSnum}/${org}_${WSnum}.pseudogene.exon.merge.bed
+repeat=${wormcom}/${org}_${WSnum}/${org}_${WSnum}.rmsk.bed
+pirna=${wormcom}/${org}_${WSnum}/${org}_${WSnum}.ncrna.21urn.bed
