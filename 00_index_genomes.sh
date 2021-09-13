@@ -49,7 +49,7 @@ singularity exec ${pipeline_directory}/singularity/rnaseq bash index_bowtie_tail
 
 """ > index_bowtie_tailor.sbatch
 
-#sbatch --job-name index_bowtie_tailor --output=${logs}/${org}_${WSnum}_bowtie_tailor_index.out index_bowtie_tailor.sbatch
+sbatch --job-name index_bowtie_tailor --output=${logs}/${org}_${WSnum}_bowtie_tailor_index.out index_bowtie_tailor.sbatch
 
 ##### ignore below ####
 #star
